@@ -1,3 +1,6 @@
+using ApplicationService.Interfaces;
+using ApplicationService.Repositories;
+using ApplicationService.Services;
 using Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
