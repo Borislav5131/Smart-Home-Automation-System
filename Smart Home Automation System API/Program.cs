@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<IDeviceService, DeviceService>();
 builder.Services.AddTransient<IEventService, EventService>();
+builder.Services.AddTransient<IApplianceService, ApplianceService>();
 
 var app = builder.Build();
 
