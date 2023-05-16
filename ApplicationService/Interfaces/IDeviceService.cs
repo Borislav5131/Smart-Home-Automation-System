@@ -10,6 +10,8 @@
 
         Task<(bool added, string error)> Create(CreateDeviceDTO model);
 
+        Task<EditDeviceDTO> GetEditDetailsOfDevice(int id);
+
         Task<(bool eddited, string error)> Edit(int id, EditDeviceDTO model);
 
         Task<bool> Delete(int id);
