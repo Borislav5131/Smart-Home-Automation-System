@@ -38,6 +38,7 @@
                 <td>@device.Location</td>
                 <td>@device.PowerUsage</td>
                 <td>
+                    <a type="button" class="btn btn-sm btn-rounded" asp-controller="Event" asp-action="GetAllEvents" asp-route-deviceId="@device.Id">Events</a>
                     <a type="button" class="btn btn-sm btn-rounded" asp-action="EditDevice" asp-route-deviceId="@device.Id">Edit</a>
                     <a type="button" class="btn btn-sm btn-rounded" asp-action="DeleteDevice" asp-route-deviceId="@device.Id">Delete</a>
                 </td>

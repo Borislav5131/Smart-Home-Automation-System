@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IDeviceService, DeviceService>();
+builder.Services.AddTransient<IEventService, EventService>();
 
 var app = builder.Build();
 
