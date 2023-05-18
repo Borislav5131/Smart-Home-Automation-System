@@ -1,5 +1,6 @@
 ﻿namespace ApplicationService.Services
 {
+    using ApplicationService.DTOs.Device;
     using ApplicationService.DTOs.Event;
     using ApplicationService.Interfaces;
     using Data.Entities;
@@ -152,6 +153,24 @@
             {
                 return false;
             }
+        }
+
+        public async Task<EditEventDTO> GetEditDetailsOfEvent(int id)
+        {
+            var events = await repo.All<Event>();
+            var @event = events
+                .Where(e => e.Id == id)
+                .Select(e => new EditEventDTO
+                {
+                    Name = e.Name,
+                    Date = e.Date,
+                    Description = e.Description,
+                    IsActive = e.IsActive,
+                    DeviceId = e.DeviceId,
+                })
+                .FirstOrDefault();
+
+            return @event;
         }
     }
 }

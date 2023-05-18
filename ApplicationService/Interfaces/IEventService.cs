@@ -1,5 +1,6 @@
 ﻿namespace ApplicationService.Interfaces
 {
+    using ApplicationService.DTOs.Device;
     using ApplicationService.DTOs.Event;
 
     public interface IEventService
@@ -9,6 +10,8 @@
         Task<AllEventDTO?> GetEventById(int id);
 
         Task<(bool added, string error)> Create(CreateEventDTO model);
+
+        Task<EditEventDTO> GetEditDetailsOfEvent(int id);
 
         Task<(bool eddited, string error)> Edit(int id, EditEventDTO model);
 
