@@ -55,6 +55,19 @@
             return Ok();
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEditDetails([FromRoute] int id)
+        {
+            var @event = await this.eventService.GetEditDetailsOfEvent(id);
+
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(@event);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] EditEventDTO model)
         {

@@ -19,7 +19,5 @@
         public decimal Price { get; set; }
 
         public bool IsTurnOn { get; set; }
-
-        //public List<Device> Devices { get; set; } = new List<Device>();
     }
 }

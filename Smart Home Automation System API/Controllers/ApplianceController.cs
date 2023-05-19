@@ -55,6 +55,19 @@
             return Ok();
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEditDetails([FromRoute] int id)
+        {
+            var appliance = await this.applianceService.GetEditDetailsOfAppliance(id);
+
+            if (appliance == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(appliance);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] EditApplianceDTO model)
         {

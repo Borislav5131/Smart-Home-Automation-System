@@ -134,5 +134,23 @@
                 return false;
             }
         }
+
+        public async Task<EditApplianceDTO> GetEditDetailsOfAppliance(int id)
+        {
+            var appliances = await repo.All<Appliance>();
+            var appliance = appliances
+                .Where(a => a.Id == id)
+                .Select(a => new EditApplianceDTO
+                {
+                    Name = a.Name,
+                    IsTurnOn = a.IsTurnOn,
+                    Model = a.Model,
+                    Price = a.Price,
+                    PurchaseDate = a.PurchaseDate,
+                })
+                .FirstOrDefault();
+
+            return appliance;
+        }
     }
 }

@@ -15,9 +15,5 @@
         public float PowerUsage { get; set; }
 
         public string Image { get; set; }
-
-        //public List<Event> Events { get; set; }
-
-        //public List<Appliance> Appliances { get; set; }
     }
 }

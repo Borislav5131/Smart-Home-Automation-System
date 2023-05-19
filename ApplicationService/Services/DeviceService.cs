@@ -137,5 +137,24 @@
                 return false;
             }
         }
+
+        public async Task<EditDeviceDTO> GetEditDetailsOfDevice(int id)
+        {
+            var devices = await repo.All<Device>();
+            var device = devices
+                .Where(d => d.Id == id)
+                .Select(d => new EditDeviceDTO
+                {
+                    Name = d.Name,
+                    Type = d.Type,
+                    Status = d.Status,
+                    Location = d.Location,
+                    PowerUsage = d.PowerUsage,
+                    Image = d.Image,
+                })
+                .FirstOrDefault();
+
+            return device;
+        }
     }
 }

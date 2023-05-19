@@ -55,6 +55,19 @@
             return Ok();
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEditDetails([FromRoute]int id)
+        {
+            var device = await this.deviceService.GetEditDetailsOfDevice(id);
+
+            if (device == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(device);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromBody] EditDeviceDTO model)
         {
