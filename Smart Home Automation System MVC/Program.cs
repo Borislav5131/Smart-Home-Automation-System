@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IDeviceService, DeviceService>();
 builder.Services.AddTransient<IEventService, EventService>();
+builder.Services.AddTransient<IApplianceService, ApplianceService>();
 
 var app = builder.Build();
 
