@@ -2,10 +2,12 @@
 {
     using ApplicationService.DTOs.Device;
     using ApplicationService.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class DeviceController : Controller
     {
         private readonly IDeviceService deviceService;
