@@ -11,9 +11,9 @@
         Uri baseAddress = new Uri("https://localhost:7119/api/Appliance");
         private readonly HttpClient client;
 
-        public ApplianceService()
+        public ApplianceService(IHttpClientFactory httpClientFactory)
         {
-            client = new HttpClient();
+            client = httpClientFactory.CreateClient("MyAPI");
             client.BaseAddress = baseAddress;
         }
 

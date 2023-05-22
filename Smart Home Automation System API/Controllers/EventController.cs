@@ -2,10 +2,12 @@
 {
     using ApplicationService.DTOs.Event;
     using ApplicationService.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class EventController : Controller
     {
         private readonly IEventService eventService;

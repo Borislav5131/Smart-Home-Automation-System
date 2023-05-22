@@ -11,9 +11,9 @@
         Uri baseAddress = new Uri("https://localhost:7119/api/Event");
         private readonly HttpClient client;
 
-        public EventService()
+        public EventService(IHttpClientFactory httpClientFactory)
         {
-            client = new HttpClient();
+            client = httpClientFactory.CreateClient("MyAPI");
             client.BaseAddress = baseAddress;
         }
 

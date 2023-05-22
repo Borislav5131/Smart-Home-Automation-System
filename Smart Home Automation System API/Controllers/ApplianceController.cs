@@ -2,10 +2,12 @@
 {
     using ApplicationService.DTOs.Appliance;
     using ApplicationService.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class ApplianceController : Controller
     {
         private readonly IApplianceService applianceService;

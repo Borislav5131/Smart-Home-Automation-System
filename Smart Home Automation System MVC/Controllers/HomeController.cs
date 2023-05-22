@@ -1,9 +1,11 @@
 ﻿namespace Smart_Home_Automation_System_MVC.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Smart_Home_Automation_System_MVC.Attributes;
     using Smart_Home_Automation_System_MVC.Models;
     using System.Diagnostics;
 
+    [RedirectToLogin]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

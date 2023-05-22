@@ -1,3 +1,4 @@
+using Smart_Home_Automation_System_MVC.Handlers;
 using Smart_Home_Automation_System_MVC.Interfaces;
 using Smart_Home_Automation_System_MVC.Services;
 
@@ -8,6 +9,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IDeviceService, DeviceService>();
 builder.Services.AddTransient<IEventService, EventService>();
 builder.Services.AddTransient<IApplianceService, ApplianceService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<TokenHandler>();
+
+builder.Services.AddHttpClient("MyAPI", client =>
+{
+}).AddHttpMessageHandler<TokenHandler>();
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddLogging(builder =>
+{
+    builder.AddConsole();
+    builder.AddDebug();
+});
 
 var app = builder.Build();
 
