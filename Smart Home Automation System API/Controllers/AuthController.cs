@@ -42,7 +42,7 @@
                 return Unauthorized("Invalid username or password");
             }
 
-            var token = await userService.GenerateJwtToken();
+            var token = await userService.GenerateJwtToken(loginUserDTO);
 
             return Ok(new { token });
         }

@@ -65,11 +65,11 @@
             }
         }
 
-        public async Task<string> GenerateJwtToken()
+        public Task<string> GenerateJwtToken(LoginUserDTO loginUserDTO)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, "username")
+                new Claim(ClaimTypes.Name, loginUserDTO.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
@@ -84,7 +84,7 @@
                 signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
         }
     }
 }

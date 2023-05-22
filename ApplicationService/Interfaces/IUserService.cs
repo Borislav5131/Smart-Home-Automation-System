@@ -8,6 +8,6 @@
 
         Task<bool> Login(LoginUserDTO loginUserDTO);
 
-        Task<string> GenerateJwtToken();
+        Task<string> GenerateJwtToken(LoginUserDTO loginUserDTO);
     }
 }
