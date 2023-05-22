@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Smart Home Automation System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Smart_Home_Automation_System_MVC.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/Smart_Home_Automation_System_MVC.styles.css" asp-append-version="true" />*@
 </head>
 <body>
     <header>
@@ -26,6 +26,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Appliance" asp-action="GetAllAppliances">Appliances</a>
                         </li>
                     </ul>
+                    @*<ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                        </li>
+                    </ul>*@
+                    <ul class="nav justify-content-end">
+                        @if (ViewContext.HttpContext.Request.Cookies["token"] != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+
                 </div>
             </div>
         </nav>

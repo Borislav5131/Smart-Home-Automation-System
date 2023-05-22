@@ -1,9 +1,11 @@
 ﻿namespace Smart_Home_Automation_System_MVC.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Smart_Home_Automation_System_MVC.Attributes;
     using Smart_Home_Automation_System_MVC.Interfaces;
     using Smart_Home_Automation_System_MVC.Models.Appliance;
 
+    [RedirectToLogin]
     public class ApplianceController : Controller
     {
         private readonly IApplianceService applianceService;

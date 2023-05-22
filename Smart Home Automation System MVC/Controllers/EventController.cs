@@ -1,11 +1,11 @@
 ﻿namespace Smart_Home_Automation_System_MVC.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Smart_Home_Automation_System_MVC.Attributes;
     using Smart_Home_Automation_System_MVC.Interfaces;
-    using Smart_Home_Automation_System_MVC.Models.Device;
     using Smart_Home_Automation_System_MVC.Models.Event;
-    using System.Reflection;
 
+    [RedirectToLogin]
     public class EventController : Controller
     {
         private readonly IEventService eventService;

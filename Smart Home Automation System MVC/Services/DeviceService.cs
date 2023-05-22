@@ -3,16 +3,16 @@
     using Newtonsoft.Json;
     using Smart_Home_Automation_System_MVC.Interfaces;
     using Smart_Home_Automation_System_MVC.Models.Device;
-    using System.Reflection;
+    using System.Net.Http;
 
     public class DeviceService : IDeviceService
     {
         Uri baseAddress = new Uri("https://localhost:7119/api/Device");
         private readonly HttpClient client;
 
-        public DeviceService()
+        public DeviceService(IHttpClientFactory httpClientFactory)
         {
-            client = new HttpClient();
+            client = httpClientFactory.CreateClient("MyAPI");
             client.BaseAddress = baseAddress;
         }
 
