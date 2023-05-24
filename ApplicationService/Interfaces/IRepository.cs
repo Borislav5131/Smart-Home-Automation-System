@@ -1,6 +1,7 @@
 ﻿namespace ApplicationService.Interfaces
 {
     using System.Linq;
+    using System.Linq.Expressions;
 
     public interface IRepository
     {
@@ -11,6 +12,9 @@
             where T : class;
 
         Task<IEnumerable<T>> All<T>()
+            where T : class;
+
+        Task<IEnumerable<T>> AllIncluding<T>(params Expression<Func<T, object>>[] includeProperties)
             where T : class;
 
         Task<int> SaveChanges();

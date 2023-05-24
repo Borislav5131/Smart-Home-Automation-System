@@ -3,6 +3,7 @@
     using ApplicationService.Interfaces;
     using Data.Context;
     using Microsoft.EntityFrameworkCore;
+    using System.Linq.Expressions;
 
     public class Repository : IRepository
     {
@@ -29,6 +30,19 @@
             where T : class
         {
             return await DbSet<T>().ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> AllIncluding<T>(params Expression<Func<T, object>>[] includeProperties)
+            where T : class
+        {
+            IQueryable<T> query = DbSet<T>();
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.ToListAsync();
         }
 
         public Task Remove<T>(T entity) 
