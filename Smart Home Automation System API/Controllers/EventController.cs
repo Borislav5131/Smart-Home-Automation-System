@@ -18,9 +18,9 @@
         }
 
         [HttpGet("{deviceId}")]
-        public async Task<IActionResult> All(int deviceId)
+        public async Task<IActionResult> All(int deviceId, string? search)
         {
-            var events = await eventService.GetAllEventsOfDevice(deviceId);
+            var events = await eventService.GetAllEventsOfDevice(deviceId, search);
 
             return Ok(events);
         }

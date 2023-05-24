@@ -17,10 +17,10 @@
             client.BaseAddress = baseAddress;
         }
 
-        public async Task<List<EventViewModel>> GetEvents(int deviceId)
+        public async Task<List<EventViewModel>> GetEvents(int deviceId, string search)
         {
             List<EventViewModel> events = new List<EventViewModel>();
-            HttpResponseMessage response = await client.GetAsync($"{baseAddress}/All/{deviceId}");
+            HttpResponseMessage response = await client.GetAsync($"{baseAddress}/All/{deviceId}?search={search}");
 
             if (response.IsSuccessStatusCode)
             {

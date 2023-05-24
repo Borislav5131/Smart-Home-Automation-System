@@ -5,7 +5,7 @@
 
     public interface IEventService
     {
-        Task<List<AllEventDTO>> GetAllEventsOfDevice(int deviceId);
+        Task<List<AllEventDTO>> GetAllEventsOfDevice(int deviceId, string search);
 
         Task<AllEventDTO?> GetEventById(int id);
 

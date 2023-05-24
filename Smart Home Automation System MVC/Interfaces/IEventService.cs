@@ -4,7 +4,7 @@
 
     public interface IEventService
     {
-        Task<List<EventViewModel>> GetEvents(int deviceId);
+        Task<List<EventViewModel>> GetEvents(int deviceId, string search);
 
         Task<bool> CreateEvent(CreateEventModel model);
 
