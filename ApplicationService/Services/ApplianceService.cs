@@ -93,7 +93,7 @@
             bool eddited = false;
             string error = null;
 
-            var appliances = await repo.All<Appliance>();
+            var appliances = await repo.AllIncluding<Appliance>(a => a.Devices);
             var appliance = appliances.Where(d => d.Id == id).FirstOrDefault();
 
             if (appliance == null)
@@ -106,6 +106,30 @@
             appliance.Price = model.Price;
             appliance.PurchaseDate = model.PurchaseDate;
             appliance.IsTurnOn = model.IsTurnOn;
+
+            if (model.SelectedDeviceIds != null)
+            {
+                var devices = await repo.All<Device>();
+                var selectedDevices = devices.Where(device => model.SelectedDeviceIds.Contains(device.Id)).ToList();
+
+                foreach (var device in selectedDevices)
+                {
+                    if (!appliance.Devices.Contains(device))
+                    {
+                        appliance.Devices.Add(device);
+                    }
+                }
+
+                var removedDevices = appliance.Devices.Except(selectedDevices).ToList();
+                foreach (var device in removedDevices)
+                {
+                    appliance.Devices.Remove(device);
+                }
+            }
+            else
+            {
+                appliance.Devices.Clear();
+            }
 
             try
             {
@@ -144,7 +168,14 @@
 
         public async Task<EditApplianceDTO> GetEditDetailsOfAppliance(int id)
         {
-            var appliances = await repo.All<Appliance>();
+            var devices = await repo.All<Device>();
+            var deviceOptions = devices.Select(d => new SelectListItemDTO
+            {
+                Text = d.Name,
+                Value = d.Id.ToString()
+            });
+
+            var appliances = await repo.AllIncluding<Appliance>(a => a.Devices);
             var appliance = appliances
                 .Where(a => a.Id == id)
                 .Select(a => new EditApplianceDTO
@@ -154,6 +185,8 @@
                     Model = a.Model,
                     Price = a.Price,
                     PurchaseDate = a.PurchaseDate,
+                    SelectedDeviceIds = a.Devices.Select(d => d.Id).ToList(),
+                    DeviceOptions = deviceOptions
                 })
                 .FirstOrDefault();
 

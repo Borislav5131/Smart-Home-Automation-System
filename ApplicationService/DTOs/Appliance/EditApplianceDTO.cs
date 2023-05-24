@@ -20,5 +20,9 @@
         public decimal Price { get; set; }
 
         public bool IsTurnOn { get; set; }
+
+        public List<int>? SelectedDeviceIds { get; set; }
+
+        public IEnumerable<SelectListItemDTO> DeviceOptions { get; set; }
     }
 }

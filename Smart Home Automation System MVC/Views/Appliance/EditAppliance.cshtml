@@ -33,6 +33,12 @@
                 </label>
             </div>
             <div class="form-group">
+                <label for="deviceAssociations">Associated Devices</label>
+                <input asp-for="DeviceOptions" class="form-control" type="hidden" />
+                <select multiple class="form-control" asp-for="SelectedDeviceIds" asp-items="Model.DeviceOptions"></select>
+                <span asp-validation-for="SelectedDeviceIds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

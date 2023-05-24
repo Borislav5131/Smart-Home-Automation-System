@@ -1,5 +1,6 @@
 ﻿namespace Smart_Home_Automation_System_MVC.Models.Appliance
 {
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System.ComponentModel.DataAnnotations;
     using static Constants.Appliance;
 
@@ -22,5 +23,9 @@
         public decimal Price { get; set; }
 
         public bool IsTurnOn { get; set; }
+
+        public List<int>? SelectedDeviceIds { get; set; }
+
+        public IEnumerable<SelectListItem> DeviceOptions { get; set; }
     }
 }
