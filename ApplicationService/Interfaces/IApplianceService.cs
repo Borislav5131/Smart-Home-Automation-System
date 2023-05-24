@@ -4,7 +4,7 @@
 
     public interface IApplianceService
     {
-        Task<List<AllApplianceDTO>> GetAllAppliances();
+        Task<List<AllApplianceDTO>> GetAllAppliances(string search);
 
         Task<AllApplianceDTO?> GetApplianceById(int id);
 

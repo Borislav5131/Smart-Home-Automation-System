@@ -15,9 +15,16 @@
             this.repo = repo;
         }
 
-        public async Task<List<AllApplianceDTO>> GetAllAppliances()
+        public async Task<List<AllApplianceDTO>> GetAllAppliances(string search)
         {
             var appliances = await repo.All<Appliance>();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.Trim().ToLower();
+                appliances = appliances.Where(d => d.Name.ToLower().Contains(search));
+            }
+
             var result = appliances
                 .Select(a => new AllApplianceDTO
                 {
