@@ -4,7 +4,7 @@
 
     public interface IDeviceService
     {
-        Task<List<DeviceViewModel>> GetDevices();
+        Task<List<DeviceViewModel>> GetDevices(string search);
 
         Task<bool> CreateDevice(CreateDeviceModel model);
 

@@ -14,9 +14,16 @@
             this.repo = repo;
         }
 
-        public async Task<List<AllDeviceDTO>> GetAllDevices()
+        public async Task<List<AllDeviceDTO>> GetAllDevices(string search)
         {
             var devices = await repo.All<Device>();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.Trim().ToLower();
+                devices = devices.Where(d => d.Name.ToLower().Contains(search));
+            }
+
             var result = devices
                 .Select(d => new AllDeviceDTO
                 {
