@@ -4,7 +4,7 @@
 
     public interface IApplianceService
     {
-        Task<List<ApplianceViewModel>> GetAppliances();
+        Task<List<ApplianceViewModel>> GetAppliances(string search);
 
         Task<bool> CreateAppliance(CreateApplianceModel model);
 

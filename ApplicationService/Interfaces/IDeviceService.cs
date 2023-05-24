@@ -4,7 +4,7 @@
 
     public interface IDeviceService
     {
-        Task<List<AllDeviceDTO>> GetAllDevices();
+        Task<List<AllDeviceDTO>> GetAllDevices(string search);
 
         Task<AllDeviceDTO?> GetDeviceById(int id);
 

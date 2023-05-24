@@ -17,12 +17,12 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEvents(int deviceId, int? page)
+        public async Task<IActionResult> GetAllEvents(int deviceId, int? page, string? search)
         {
             int pageSize = 5;
             int pageNumber = page ?? 1;
 
-            var result = await this.eventService.GetEvents(deviceId);
+            var result = await this.eventService.GetEvents(deviceId, search);
             ViewBag.DeviceId = deviceId;
 
             var pagedData = result.ToPagedList(pageNumber, pageSize);

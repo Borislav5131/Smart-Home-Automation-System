@@ -17,9 +17,16 @@
             this.repo = repo;
         }
 
-        public async Task<List<AllEventDTO>> GetAllEventsOfDevice(int deviceId)
+        public async Task<List<AllEventDTO>> GetAllEventsOfDevice(int deviceId, string search)
         {
             var events = await repo.All<Event>();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.Trim().ToLower();
+                events = events.Where(d => d.Name.ToLower().Contains(search));
+            }
+
             var result = events
                 .Where(e => e.DeviceId == deviceId)
                 .Select(e => new AllEventDTO

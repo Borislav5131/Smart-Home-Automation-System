@@ -17,12 +17,12 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllDevices(int? page)
+        public async Task<IActionResult> GetAllDevices(int? page, string? search)
         {
             int pageSize = 5;
             int pageNumber = page ?? 1;
 
-            var result = await this.deviceService.GetDevices();
+            var result = await this.deviceService.GetDevices(search);
 
             var pagedData = result.ToPagedList(pageNumber, pageSize);
 

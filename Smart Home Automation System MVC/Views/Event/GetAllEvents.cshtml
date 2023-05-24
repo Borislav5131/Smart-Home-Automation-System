@@ -1,61 +1,74 @@
 ﻿@model IPagedList<Smart_Home_Automation_System_MVC.Models.Event.EventViewModel>
 
-<a type="button" class="btn btn-primary" asp-action="CreateEvent" asp-route-deviceId="@ViewBag.DeviceId">Create Event</a>
+<div class="container">
+    <h1 class="text-center">Event Management</h1>
+    
+    <div class="row mb-3">
+        <div class="col-sm-6">
+            <a type="button" class="btn btn-primary" asp-action="CreateEvent" asp-route-deviceId="@ViewBag.DeviceId">Create Event</a>
+        </div>
+        <div class="col-sm-6">
+            <form method="get" action="@Url.Action("GetAllEvents")" class="d-flex">
+                <input type="hidden" name="deviceId" value="@ViewBag.DeviceId" />
+                <input type="text" name="search" class="form-control me-2" placeholder="Search by Name" value="@Context.Request.Query["search"]" />
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </form>
+        </div>
+    </div>
 
-<br />
-<br />
-<br />
-
-<table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>IsActive</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var eventt in Model)
-        {
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
             <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">@eventt.Name</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">@eventt.Date</p>
-                </td>
-                <td>@eventt.Description</td>
-                <td>@eventt.IsActive</td>
-                <td>
-                    <a type="button" class="btn btn-sm btn-rounded" asp-action="EditEvent" asp-route-eventId="@eventt.Id">Edit</a>
-                    <a type="button" class="btn btn-sm btn-rounded" asp-action="DeleteEvent" asp-route-eventId="@eventt.Id" asp-route-deviceId="@ViewBag.DeviceId">Delete</a>
-                </td>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>IsActive</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<div class="pagination-container">
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item @(Model.IsFirstPage ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("GetAllEvents", new { deviceId = @ViewBag.DeviceId, page = Model.PageNumber - 1 })"><-</a>
-            </li>
-            @for (int i = 1; i <= Model.PageCount; i++)
+        </thead>
+        <tbody>
+            @foreach (var eventt in Model)
             {
-                <li class="page-item @(Model.PageNumber == i ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("GetAllEvents", new { deviceId = @ViewBag.DeviceId, page = i })">@i</a>
-                </li>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@eventt.Name</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@eventt.Date</p>
+                    </td>
+                    <td>@eventt.Description</td>
+                    <td>@eventt.IsActive</td>
+                    <td>
+                        <a type="button" class="btn btn-sm btn-rounded" asp-action="EditEvent" asp-route-eventId="@eventt.Id">Edit</a>
+                        <a type="button" class="btn btn-sm btn-rounded" asp-action="DeleteEvent" asp-route-eventId="@eventt.Id" asp-route-deviceId="@ViewBag.DeviceId">Delete</a>
+                    </td>
+                </tr>
             }
-            <li class="page-item @(Model.IsLastPage ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("GetAllEvents", new { deviceId = @ViewBag.DeviceId, page = Model.PageNumber + 1 })">-></a>
-            </li>
-        </ul>
-    </nav>
+        </tbody>
+    </table>
+
+    <br />
+
+    <div class="pagination-container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.IsFirstPage ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("GetAllEvents", new { deviceId = @ViewBag.DeviceId, page = Model.PageNumber - 1, search = Context.Request.Query["search"] })"><-</a>
+                </li>
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("GetAllEvents", new { deviceId = @ViewBag.DeviceId, page = i, search = Context.Request.Query["search"] })">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.IsLastPage ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("GetAllEvents", new { deviceId = @ViewBag.DeviceId, page = Model.PageNumber + 1, search = Context.Request.Query["search"] })">-></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>

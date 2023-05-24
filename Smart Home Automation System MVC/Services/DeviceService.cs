@@ -16,10 +16,10 @@
             client.BaseAddress = baseAddress;
         }
 
-        public async Task<List<DeviceViewModel>> GetDevices()
+        public async Task<List<DeviceViewModel>> GetDevices(string search)
         {
             List<DeviceViewModel> devices = new List<DeviceViewModel>();
-            HttpResponseMessage response = await client.GetAsync($"{baseAddress}/All");
+            HttpResponseMessage response = await client.GetAsync($"{baseAddress}/All?search={search}");
 
             if (response.IsSuccessStatusCode)
             {

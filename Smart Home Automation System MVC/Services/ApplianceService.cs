@@ -17,10 +17,10 @@
             client.BaseAddress = baseAddress;
         }
 
-        public async Task<List<ApplianceViewModel>> GetAppliances()
+        public async Task<List<ApplianceViewModel>> GetAppliances(string search)
         {
             List<ApplianceViewModel> appliances = new List<ApplianceViewModel>();
-            HttpResponseMessage response = await client.GetAsync($"{baseAddress}/All");
+            HttpResponseMessage response = await client.GetAsync($"{baseAddress}/All?search={search}");
 
             if (response.IsSuccessStatusCode)
             {

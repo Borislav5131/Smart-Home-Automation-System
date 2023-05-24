@@ -18,9 +18,9 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(string? search)
         {
-            var appliances = await applianceService.GetAllAppliances();
+            var appliances = await applianceService.GetAllAppliances(search);
 
             return Ok(appliances);
         }
