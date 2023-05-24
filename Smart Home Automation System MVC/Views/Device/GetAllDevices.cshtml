@@ -1,4 +1,4 @@
-﻿@model List<Smart_Home_Automation_System_MVC.Models.Device.DeviceViewModel>
+﻿@model IPagedList<Smart_Home_Automation_System_MVC.Models.Device.DeviceViewModel>
 
 <a type="button" class="btn btn-primary" asp-action="CreateDevice">Create Device</a>
 
@@ -46,3 +46,22 @@
         }
     </tbody>
 </table>
+
+<div class="pagination-container">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.IsFirstPage ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("GetAllDevices", new { page = Model.PageNumber - 1 })"><-</a>
+            </li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("GetAllDevices", new { page = i })">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.IsLastPage ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("GetAllDevices", new { page = Model.PageNumber + 1 })">-></a>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -4,6 +4,7 @@
     using Smart_Home_Automation_System_MVC.Attributes;
     using Smart_Home_Automation_System_MVC.Interfaces;
     using Smart_Home_Automation_System_MVC.Models.Appliance;
+    using X.PagedList;
 
     [RedirectToLogin]
     public class ApplianceController : Controller
@@ -16,11 +17,16 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAppliances()
+        public async Task<IActionResult> GetAllAppliances(int? page)
         {
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+
             var result = await this.applianceService.GetAppliances();
 
-            return View(result);
+            var pagedData = result.ToPagedList(pageNumber, pageSize);
+
+            return View(pagedData);
         }
 
         [HttpGet]
