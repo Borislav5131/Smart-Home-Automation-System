@@ -1,6 +1,5 @@
 ﻿namespace ApplicationService.Services
 {
-    using ApplicationService.DTOs.Device;
     using ApplicationService.DTOs.Event;
     using ApplicationService.Interfaces;
     using Data.Entities;
@@ -150,8 +149,17 @@
                 return false;
             }
 
+            var devices = await repo.All<Device>();
+            var device = devices.FirstOrDefault(d => d.Id == @event.DeviceId);
+
+            if (device == null)
+            {
+                return false;
+            }
+
             try
             {
+                device.Events.Remove(@event);
                 await repo.Remove<Event>(@event);
                 await repo.SaveChanges();
                 return true;
