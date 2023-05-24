@@ -1,55 +1,60 @@
 ﻿@model Smart_Home_Automation_System_MVC.Models.Device.CreateDeviceModel
 
-<h4>Create Device</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateDevice" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PowerUsage" class="control-label"></label>
-                <input asp-for="PowerUsage" class="form-control" />
-                <span asp-validation-for="PowerUsage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Image</label>
-                <br />
-                <input type="file" name="image" class="form-control-file" accept="image/png, image/jpeg">
-            </div>
-            <br>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <h4 class="text-center">Create Device</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form asp-action="CreateDevice" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Device Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label">Device Type</label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label">Device Status</label>
+                    <input asp-for="Status" class="form-control" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label">Device Location</label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PowerUsage" class="control-label">Power Usage</label>
+                    <input asp-for="PowerUsage" class="form-control" />
+                    <span asp-validation-for="PowerUsage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Device Image</label>
+                    <input type="file" name="image" class="form-control-file" accept="image/png, image/jpeg">
+                </div>
+
+                <div class="form-group mt-4">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="GetAllDevices" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<br>
-
-<div>
-    <a asp-action="GetAllDevices">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
